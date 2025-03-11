@@ -23,6 +23,18 @@ const getColumns = async (tablename) => {
 const createEntity = async function entityFactory(tablename) {
   const columns = await getColumns(tablename);
 
+  const findById = async (id) => {
+    const query = `
+      SELECT *
+      FROM ${tablename}
+      WHERE id = $1;
+    `;
+    const values = [id];
+
+    const { rows } = await db.query(query, values);
+    return rows[0] || null;
+  };
+
   const create = async (data) => {
     const validColumns = Object.keys(data).map((column) => {
       if (!columns.includes(column)) {
@@ -54,6 +66,7 @@ const createEntity = async function entityFactory(tablename) {
   };
 
   return {
+    findById,
     create,
   };
 };
