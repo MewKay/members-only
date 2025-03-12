@@ -20,6 +20,19 @@ const getColumns = async (tablename) => {
   }
 };
 
+const filterValidColumns = (entityColumns, data) => {
+  const dataColumns = Object.keys(data);
+  const filteredColumns = dataColumns.map((column) => {
+    if (!entityColumns.includes(column)) {
+      return;
+    }
+
+    return column;
+  });
+
+  return filteredColumns;
+};
+
 const createEntity = async function entityFactory(tablename) {
   const columns = await getColumns(tablename);
 
@@ -36,13 +49,7 @@ const createEntity = async function entityFactory(tablename) {
   };
 
   const create = async (data) => {
-    const validColumns = Object.keys(data).map((column) => {
-      if (!columns.includes(column)) {
-        return;
-      }
-
-      return column;
-    });
+    const validColumns = filterValidColumns(columns, data);
     const columnNames = validColumns.join(", ");
 
     let paramList = [];
@@ -59,15 +66,36 @@ const createEntity = async function entityFactory(tablename) {
         (${params})
       RETURNING *;
     `;
-    console.log(query);
 
     const { rows } = await db.query(query, values);
     return rows[0];
   };
 
+  const update = async (id, data) => {
+    const validColumns = filterValidColumns(columns, data);
+    const updatedColumns = validColumns
+      .map((column, index) => {
+        return `${column} = $${index + 2}`;
+      })
+      .join(", ");
+    const params = validColumns.map((column) => data[column]);
+
+    const query = `
+      UPDATE ${tablename}
+      SET ${updatedColumns}
+      WHERE id = $1
+      RETURNING *;
+    `;
+    const values = [id, ...params];
+
+    const { rows } = await db.query(query, values);
+    return rows[0] || null;
+  };
+
   return {
     findById,
     create,
+    update,
   };
 };
 
