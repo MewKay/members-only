@@ -1,40 +1,9 @@
 const db = require("../db/index");
-
-const getColumns = async (tablename) => {
-  try {
-    const columnQuery = `
-      SELECT column_name
-      FROM information_schema.columns
-      WHERE table_name = '${tablename}';
-    `;
-    const { rows } = await db.query(columnQuery);
-
-    if (rows.length <= 0) {
-      throw new Error(`"${tablename}" is not a valid table`);
-    }
-
-    const columnNames = rows.map((row) => row.column_name);
-    return columnNames.sort();
-  } catch (error) {
-    console.error(error.stack);
-  }
-};
-
-const filterValidColumns = (entityColumns, data) => {
-  const dataColumns = Object.keys(data);
-  const filteredColumns = dataColumns.map((column) => {
-    if (!entityColumns.includes(column)) {
-      return;
-    }
-
-    return column;
-  });
-
-  return filteredColumns;
-};
+const { getColumns, filterValidColumns } = require("../utils/db.util");
 
 const createEntity = async function entityFactory(tablename) {
-  const columns = await getColumns(tablename);
+  const entityColumns = await getColumns(tablename);
+  const columnNames = entityColumns.map((row) => row.column_name);
 
   const findById = async (id) => {
     const query = `
@@ -49,8 +18,8 @@ const createEntity = async function entityFactory(tablename) {
   };
 
   const create = async (data) => {
-    const validColumns = filterValidColumns(columns, data);
-    const columnNames = validColumns.join(", ");
+    const validColumns = filterValidColumns(columnNames, data);
+    const validColumnNames = validColumns.join(", ");
 
     let paramList = [];
     const values = validColumns.map((column, index) => {
@@ -61,7 +30,7 @@ const createEntity = async function entityFactory(tablename) {
 
     const query = `
       INSERT INTO ${tablename} 
-        (${columnNames})
+        (${validColumnNames})
       VALUES
         (${params})
       RETURNING *;
@@ -72,7 +41,7 @@ const createEntity = async function entityFactory(tablename) {
   };
 
   const update = async (id, data) => {
-    const validColumns = filterValidColumns(columns, data);
+    const validColumns = filterValidColumns(columnNames, data);
     const updatedColumns = validColumns
       .map((column, index) => {
         return `${column} = $${index + 2}`;
