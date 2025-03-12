@@ -92,10 +92,23 @@ const createEntity = async function entityFactory(tablename) {
     return rows[0] || null;
   };
 
+  const remove = async (id) => {
+    const query = `
+      DELETE FROM ${tablename}
+      WHERE id = $1
+      RETURNING *;
+    `;
+    const values = [id];
+
+    const { rows } = await db.query(query, values);
+    return rows[0];
+  };
+
   return {
     findById,
     create,
     update,
+    remove,
   };
 };
 
