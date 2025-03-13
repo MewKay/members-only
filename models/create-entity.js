@@ -3,7 +3,54 @@ const { getColumns, filterValidColumns } = require("../utils/db.util");
 
 const createEntity = async function entityFactory(tablename) {
   const entityColumns = await getColumns(tablename);
-  const columnNames = entityColumns.map((row) => row.column_name);
+  const columnNames = Object.keys(entityColumns);
+
+  const findBy = async (filters = {}) => {
+    let query;
+    let values = [];
+
+    if (Object.keys(filters).length <= 0) {
+      query = `
+        SELECT *
+        FROM ${tablename};
+      `;
+    } else {
+      const validColumns = filterValidColumns(entityColumns, filters);
+
+      if (validColumns.length <= 0) {
+        return [];
+      }
+
+      const clauses = validColumns
+        .map((column, index) => {
+          const columnDataType = entityColumns[column];
+
+          // For simplicity sake, data can only be queried by date regardless of time
+          if (columnDataType.includes("timestamp with time zone")) {
+            values.push(filters[column]);
+            return `${column}::date = $${index + 1}`;
+          }
+
+          if (!columnDataType.includes("character")) {
+            values.push(filters[column]);
+            return `${column} = $${index + 1}`;
+          }
+
+          values.push(`%${filters[column]}%`);
+          return `${column} ILIKE $${index + 1}`;
+        })
+        .join(" AND ");
+
+      query = `
+        SELECT *
+        FROM ${tablename}
+        WHERE ${clauses};
+      `;
+    }
+
+    const { rows } = await db.query(query, values);
+    return rows;
+  };
 
   const findById = async (id) => {
     const query = `
@@ -74,6 +121,7 @@ const createEntity = async function entityFactory(tablename) {
   };
 
   return {
+    findBy,
     findById,
     create,
     update,

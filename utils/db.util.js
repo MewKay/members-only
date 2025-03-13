@@ -13,7 +13,12 @@ const getColumns = async (tablename) => {
       throw new Error(`"${tablename}" is not a valid table`);
     }
 
-    return rows;
+    const columns = {};
+    rows.forEach(
+      ({ column_name, data_type }) => (columns[column_name] = data_type),
+    );
+
+    return columns;
   } catch (error) {
     console.error(error.stack);
   }
@@ -21,12 +26,9 @@ const getColumns = async (tablename) => {
 
 const filterValidColumns = (entityColumns, data) => {
   const dataColumns = Object.keys(data);
-  const filteredColumns = dataColumns.map((column) => {
-    if (!entityColumns.includes(column)) {
-      return;
-    }
-
-    return column;
+  const filteredColumns = dataColumns.filter((column) => {
+    const isColumnOfEntity = entityColumns[column] !== undefined;
+    return isColumnOfEntity;
   });
 
   return filteredColumns;
