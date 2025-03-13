@@ -3,10 +3,12 @@ const app = express();
 
 const path = require("node:path");
 const viewsPath = path.join(__dirname, "views");
+const assetsPath = path.join(__dirname, "public");
 
 app.set("views", viewsPath);
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(assetsPath));
 
 const indexRouter = require("./routes/index.router");
 app.use("/", indexRouter);
