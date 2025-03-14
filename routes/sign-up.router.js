@@ -1,7 +1,6 @@
 const router = require("express").Router();
+const controller = require("../controllers/sign-up.controller");
 
-router.get("/", (req, res) => {
-  res.send("This is sign up page");
-});
+router.get("/", controller.signUpGet);
 
 module.exports = router;
