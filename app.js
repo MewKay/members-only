@@ -11,7 +11,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(assetsPath));
 
 const indexRouter = require("./routes/index.router");
+const signUpRouter = require("./routes/sign-up.router");
 app.use("/", indexRouter);
+app.use("/sign-up", signUpRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
