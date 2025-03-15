@@ -9,4 +9,4 @@ const query = (text, params, callback) => {
   return pool.query(text, params, callback);
 };
 
-module.exports = { query };
+module.exports = { pool, query };

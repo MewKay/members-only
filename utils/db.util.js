@@ -1,4 +1,4 @@
-const db = require("../db/index");
+const db = require("../config/database");
 
 const getColumns = async (tablename) => {
   try {

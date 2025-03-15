@@ -1,4 +1,4 @@
-const db = require("../db/index");
+const db = require("../config/database");
 const { getColumns, filterValidColumns } = require("../utils/db.util");
 
 const createEntity = async function entityFactory(tablename) {
