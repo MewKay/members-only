@@ -3,7 +3,6 @@ const { getColumns, filterValidColumns } = require("../utils/db.util");
 
 const createEntity = async function entityFactory(tablename) {
   const entityColumns = await getColumns(tablename);
-  const columnNames = Object.keys(entityColumns);
 
   const findBy = async (filters = {}) => {
     let query;
@@ -65,7 +64,12 @@ const createEntity = async function entityFactory(tablename) {
   };
 
   const create = async (data) => {
-    const validColumns = filterValidColumns(columnNames, data);
+    const validColumns = filterValidColumns(entityColumns, data);
+
+    if (validColumns.length <= 0) {
+      return null;
+    }
+
     const validColumnNames = validColumns.join(", ");
 
     let paramList = [];
@@ -88,7 +92,12 @@ const createEntity = async function entityFactory(tablename) {
   };
 
   const update = async (id, data) => {
-    const validColumns = filterValidColumns(columnNames, data);
+    const validColumns = filterValidColumns(entityColumns, data);
+
+    if (validColumns.length <= 0) {
+      return null;
+    }
+
     const updatedColumns = validColumns
       .map((column, index) => {
         return `${column} = $${index + 2}`;
