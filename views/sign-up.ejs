@@ -1,9 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <%- include("partials/head.ejs", { title }) %>
-  </head>
+  <head> </head>
   <body>
-    This is sign up view
+    <main>
+      <form action="/" method="post">
+        <h2>Create Your Account</h2>
+
+        <div class="full-name-container">
+          <div class="input">
+            <label for="first-name">First Name</label>
+            <input
+              type="text"
+              id="first-name"
+              maxlength="30"
+              name="first_name"
+            />
+          </div>
+
+          <div class="input">
+            <label for="last-name">
+              Last Name
+              <span class="required">*</span>
+            </label>
+            <input
+              type="text"
+              id="last-name"
+              maxlength="30"
+              name="last_name"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="username-container input">
+          <label for="username">
+            Username
+            <span class="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="username"
+            maxlength="15"
+            name="username"
+            required
+          />
+        </div>
+
+        <div class="password-container input">
+          <label for="password">
+            Password
+            <span class="required">*</span>
+          </label>
+          <input type="password" minlength="4" name="password" required />
+        </div>
+
+        <div class="confirm-password-container input">
+          <label for="confirm-password">
+            Confirm Password
+            <span class="required">*</span>
+          </label>
+          <input
+            type="password"
+            minlength="4"
+            name="confirm_password"
+            required
+          />
+        </div>
+
+        <button type="submit">Register</button>
+      </form>
+    </main>
   </body>
 </html>
