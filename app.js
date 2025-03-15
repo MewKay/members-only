@@ -10,6 +10,9 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(assetsPath));
 
+const session = require("./config/session");
+app.use(session);
+
 const indexRouter = require("./routes/index.router");
 const signUpRouter = require("./routes/sign-up.router");
 app.use("/", indexRouter);
