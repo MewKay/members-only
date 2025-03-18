@@ -1,7 +1,7 @@
 const db = require("../config/database");
 const createEntity = require("./create-entity");
 
-const Message = (async function createMessageModel() {
+const Message = async function createMessageModel() {
   const entity = await createEntity("messages");
 
   const findMessageUser = async (id) => {
@@ -22,6 +22,6 @@ const Message = (async function createMessageModel() {
     ...entity,
     findMessageUser,
   };
-})();
+};
 
 module.exports = Message;
