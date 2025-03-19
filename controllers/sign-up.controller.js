@@ -17,15 +17,14 @@ const signUpPost = [
     }
 
     const { first_name = "", last_name, username, password } = matchedData(req);
-    const user = await User();
-    const userResult = await user.create({
+    const user = await User.create({
       first_name,
       last_name,
       username,
       password: await bcrypt.hash(password, 10),
     });
 
-    res.send(userResult);
+    res.send(user);
   }),
 ];
 

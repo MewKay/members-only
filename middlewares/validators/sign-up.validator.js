@@ -4,8 +4,7 @@ const { ranges, locale } = require("../../constants/validation");
 
 const { body } = new ExpressValidator({
   isUsernameTaken: async (value) => {
-    const user = await User();
-    const existingUsers = await user.findBy({ username: value });
+    const existingUsers = await User.findBy({ username: value });
     const isUsernameUnique = existingUsers.length <= 0;
 
     if (!isUsernameUnique) {
@@ -13,7 +12,7 @@ const { body } = new ExpressValidator({
     }
   },
   isPasswordConfirmed: (value, { req }) => {
-    return value === req.body.confirm_password;
+    return value === req.body.password;
   },
 });
 
@@ -64,7 +63,8 @@ const signUpValidator = [
   body("confirm_password")
     .isLength({ min: minPassword, max: maxPassword })
     .withMessage(passwordLengthErrorMessage)
-    .isPasswordConfirmed(),
+    .isPasswordConfirmed()
+    .withMessage("Passwords are not matching"),
 ];
 
 module.exports = signUpValidator;

@@ -1,10 +1,22 @@
 const db = require("../config/database");
 const { getColumns, filterValidColumns } = require("../utils/db.util");
 
-const createEntity = async function entityFactory(tablename) {
-  const entityColumns = await getColumns(tablename);
+const entityColumnsList = {};
 
+const getTableColumns = async (tablename) => {
+  let tableColumns = entityColumnsList[tablename];
+
+  if (!tableColumns) {
+    tableColumns = await getColumns(tablename);
+    entityColumnsList[tablename] = tableColumns;
+  }
+
+  return tableColumns;
+};
+
+const createEntity = function entityFactory(tablename) {
   const findBy = async (filters = {}) => {
+    const entityColumns = await getTableColumns(tablename);
     let query;
     let values = [];
 
@@ -64,6 +76,7 @@ const createEntity = async function entityFactory(tablename) {
   };
 
   const create = async (data) => {
+    const entityColumns = await getTableColumns(tablename);
     const validColumns = filterValidColumns(entityColumns, data);
 
     if (validColumns.length <= 0) {
@@ -92,6 +105,7 @@ const createEntity = async function entityFactory(tablename) {
   };
 
   const update = async (id, data) => {
+    const entityColumns = await getTableColumns(tablename);
     const validColumns = filterValidColumns(entityColumns, data);
 
     if (validColumns.length <= 0) {
