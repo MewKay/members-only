@@ -1,6 +1,7 @@
 const { ExpressValidator } = require("express-validator");
 const User = require("../../models/User.model");
 const { ranges, locale } = require("../../constants/validation");
+const ValidationError = require("../../errors/ValidationError");
 
 const { body } = new ExpressValidator({
   isUsernameTaken: async (value) => {
@@ -8,7 +9,7 @@ const { body } = new ExpressValidator({
     const isUsernameUnique = existingUsers.length <= 0;
 
     if (!isUsernameUnique) {
-      throw new Error("Username is already in use");
+      throw new ValidationError("Username is already in use");
     }
   },
   isPasswordConfirmed: (value, { req }) => {

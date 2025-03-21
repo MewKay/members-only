@@ -1,8 +1,9 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/User.model");
 const bcrypt = require("bcryptjs");
-const { validationResult, matchedData } = require("express-validator");
+const { matchedData } = require("express-validator");
 const signUpValidator = require("../middlewares/validators/sign-up.validator");
+const signUpValidationHandler = require("../middlewares/validators/sign-up.handler");
 
 const signUpGet = (req, res) => {
   res.render("sign-up", { title: "Sign Up" });
@@ -10,12 +11,8 @@ const signUpGet = (req, res) => {
 
 const signUpPost = [
   signUpValidator,
+  signUpValidationHandler,
   asyncHandler(async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).send(errors.array());
-    }
-
     const { first_name = "", last_name, username, password } = matchedData(req);
     const user = await User.create({
       first_name,
