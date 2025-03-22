@@ -2,22 +2,23 @@
 <html lang="en">
   <head>
     <%- include("partials/head.ejs", { title }) %>
+    <link rel="stylesheet" href="/styles/sign-up.css">
   </head>
   <body>
     <main>
-      <form action="/sign-up" method="post">
-        <h2>Create Your Account</h2>
-        
-        <% if (locals.errors) { %>
-          <ul class="error-messages">
-            <% errors.forEach((error) => { %>
-              <li><%= error.msg %></li>
-            <% }) %>
-          </ul>
-        <% } %>
-
-        <div class="full-name-container">
-          <div class="inputs">
+      <div class="content">
+        <form action="/sign-up" method="post">
+          <h2>Create Your Account</h2>
+          
+          <% if (locals.errors) { %>
+            <ul class="error-messages">
+              <% errors.forEach((error) => { %>
+                <li><%= error.msg %></li>
+              <% }) %>
+            </ul>
+          <% } %>
+  
+          <div class="full-name-container">
             <div class="input">
               <label for="first-name">First Name</label>
               <input
@@ -26,7 +27,7 @@
                 minlength="2"
                 maxlength="30"
                 name="first_name"
-
+  
                 <% if(locals.validValues) { %>
                   <% if (validValues.first_name) { %>
                     value="<%= validValues.first_name %>"
@@ -34,7 +35,7 @@
                 <% } %> 
               />
             </div>
-
+  
             <div class="input">
               <label for="last-name">
                 Last Name
@@ -55,51 +56,58 @@
               />
             </div>
           </div>
+  
+          <div class="username-container input">
+            <label for="username">
+              Username
+              <span class="required">*</span>
+            </label>
+            <input
+              type="text"
+              id="username"
+              minlength="4"
+              maxlength="15"
+              name="username"
+              required
+              <% if(locals.validValues) { %>
+                <% if (validValues.username) { %>
+                  value="<%= validValues.username %>"
+                <% } %>
+              <% } %> 
+            />
+          </div>
+  
+          <div class="password-container input">
+            <label for="password">
+              Password
+              <span class="required">*</span>
+            </label>
+            <input type="password" minlength="4" name="password" required />
+          </div>
+  
+          <div class="confirm-password-container input">
+            <label for="confirm-password">
+              Confirm Password
+              <span class="required">*</span>
+            </label>
+            <input
+              type="password"
+              minlength="4"
+              name="confirm_password"
+              required
+            />
+          </div>
+  
+          <button type="submit">Register</button>
+        </form>
+        <div class="log-in-prompt">
+          <p>Already have an account? 
+            <a href="/log-in">
+              Log in here.
+            </a>
+          </p>
         </div>
-
-        <div class="username-container input">
-          <label for="username">
-            Username
-            <span class="required">*</span>
-          </label>
-          <input
-            type="text"
-            id="username"
-            minlength="4"
-            maxlength="15"
-            name="username"
-            required
-            <% if(locals.validValues) { %>
-              <% if (validValues.username) { %>
-                value="<%= validValues.username %>"
-              <% } %>
-            <% } %> 
-          />
-        </div>
-
-        <div class="password-container input">
-          <label for="password">
-            Password
-            <span class="required">*</span>
-          </label>
-          <input type="password" minlength="4" name="password" required />
-        </div>
-
-        <div class="confirm-password-container input">
-          <label for="confirm-password">
-            Confirm Password
-            <span class="required">*</span>
-          </label>
-          <input
-            type="password"
-            minlength="4"
-            name="confirm_password"
-            required
-          />
-        </div>
-
-        <button type="submit">Register</button>
-      </form>
+      </div>
     </main>
   </body>
 </html>
