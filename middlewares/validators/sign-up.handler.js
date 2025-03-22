@@ -1,4 +1,4 @@
-const { validationResult } = require("express-validator");
+const { validationResult, matchedData } = require("express-validator");
 
 const signUpValidationHandler = async (req, res, next) => {
   const errors = validationResult(req);
@@ -7,9 +7,14 @@ const signUpValidationHandler = async (req, res, next) => {
     return next();
   }
 
-  const errorsArray = errors.mapped();
+  const errorsArray = errors.array();
+  const validValues = matchedData(req);
 
-  return res.status(400).send(errorsArray);
+  return res.render("sign-up", {
+    title: "Sign Up",
+    errors: errorsArray,
+    validValues: validValues,
+  });
 };
 
 module.exports = signUpValidationHandler;

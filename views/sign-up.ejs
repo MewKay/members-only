@@ -7,32 +7,53 @@
     <main>
       <form action="/sign-up" method="post">
         <h2>Create Your Account</h2>
+        
+        <% if (locals.errors) { %>
+          <ul class="error-messages">
+            <% errors.forEach((error) => { %>
+              <li><%= error.msg %></li>
+            <% }) %>
+          </ul>
+        <% } %>
 
         <div class="full-name-container">
-          <div class="input">
-            <label for="first-name">First Name</label>
-            <input
-              type="text"
-              id="first-name"
-              minlength="2"
-              maxlength="30"
-              name="first_name"
+          <div class="inputs">
+            <div class="input">
+              <label for="first-name">First Name</label>
+              <input
+                type="text"
+                id="first-name"
+                minlength="2"
+                maxlength="30"
+                name="first_name"
+
+                <% if(locals.validValues) { %>
+                  <% if (validValues.first_name) { %>
+                    value="<%= validValues.first_name %>"
+                  <% } %>
+                <% } %> 
               />
             </div>
-            
+
             <div class="input">
               <label for="last-name">
                 Last Name
                 <span class="required">*</span>
               </label>
               <input
-              type="text"
-              id="last-name"
-              minlength="2"
-              maxlength="30"
-              name="last_name"
-              required
-            />
+                type="text"
+                id="last-name"
+                minlength="2"
+                maxlength="30"
+                name="last_name"
+                required
+                <% if(locals.validValues) { %>
+                  <% if (validValues.last_name) { %>
+                    value="<%= validValues.last_name %>"
+                  <% } %>
+                <% } %> 
+              />
+            </div>
           </div>
         </div>
 
@@ -48,6 +69,11 @@
             maxlength="15"
             name="username"
             required
+            <% if(locals.validValues) { %>
+              <% if (validValues.username) { %>
+                value="<%= validValues.username %>"
+              <% } %>
+            <% } %> 
           />
         </div>
 
