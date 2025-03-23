@@ -1,5 +1,5 @@
 const logInGet = (req, res) => {
-  res.send("This is log in page");
+  res.render("log-in", { title: "Log In" });
 };
 
 module.exports = { logInGet };
