@@ -11,7 +11,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(assetsPath));
 
 const session = require("./config/session");
+const passport = require("passport");
 app.use(session);
+require("./config/passport");
+app.use(passport.session());
 
 const indexRouter = require("./routes/index.router");
 const signUpRouter = require("./routes/sign-up.router");
