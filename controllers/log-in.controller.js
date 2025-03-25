@@ -2,7 +2,7 @@ const passport = require("passport");
 
 const logInGet = (req, res) => {
   const { messages } = req.session;
-  const errorMessage = messages.pop();
+  const errorMessage = messages?.pop();
 
   res.render("log-in", { title: "Log In", error: errorMessage });
 };
