@@ -8,13 +8,9 @@ const logInGet = (req, res) => {
 };
 
 const logInPost = passport.authenticate("local", {
-  successRedirect: "/log-in/success",
+  successRedirect: "/",
   failureRedirect: "/log-in",
   failureMessage: true,
 });
 
-const mockLogInSuccess = (req, res) => {
-  res.send(`User ${req.user.username} is logged in!`);
-};
-
-module.exports = { logInGet, logInPost, mockLogInSuccess };
+module.exports = { logInGet, logInPost };
