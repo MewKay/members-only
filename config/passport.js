@@ -6,9 +6,10 @@ const bcrypt = require("bcryptjs");
 // Setup Strategy
 const verifyCallback = async (username, password, done) => {
   try {
-    const user = await User.findBy({ username });
+    const user = await User.findByExactUsername(username);
 
-    if (!user) {
+    const isUsernameValid = user !== undefined;
+    if (!isUsernameValid) {
       return done(null, false, { message: "Incorrect username" });
     }
 

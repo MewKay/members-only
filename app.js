@@ -22,6 +22,10 @@ const logInRouter = require("./routes/log-in.router");
 app.use("/", indexRouter);
 app.use("/sign-up", signUpRouter);
 app.use("/log-in", logInRouter);
+app.use("/log-check", (req, res) => {
+  const { user } = req;
+  res.send(`${user.username} is in session!`);
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

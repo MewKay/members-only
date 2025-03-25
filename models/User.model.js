@@ -18,9 +18,22 @@ const User = (function createUserModel() {
     return rows;
   };
 
+  const findByExactUsername = async (username) => {
+    const query = `
+      SELECT *
+      FROM users
+      WHERE username = $1;
+    `;
+    const values = [username];
+
+    const { rows } = await db.query(query, values);
+    return rows[0];
+  };
+
   return {
     ...entity,
     findUserMessages,
+    findByExactUsername,
   };
 })();
 
