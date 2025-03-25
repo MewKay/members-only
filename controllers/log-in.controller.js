@@ -1,12 +1,15 @@
 const passport = require("passport");
 
 const logInGet = (req, res) => {
-  res.render("log-in", { title: "Log In" });
+  const { messages } = req.session;
+  const errorMessage = messages.pop();
+
+  res.render("log-in", { title: "Log In", error: errorMessage });
 };
 
 const logInPost = passport.authenticate("local", {
   successRedirect: "/log-in/success",
-  failureRedirect: "/log-in/failure",
+  failureRedirect: "/log-in",
   failureMessage: true,
 });
 
@@ -14,9 +17,4 @@ const mockLogInSuccess = (req, res) => {
   res.send(`User ${req.user.username} is logged in!`);
 };
 
-const mockLogInFailure = (req, res) => {
-  const { messages } = req.session;
-  res.send(messages.at(-1));
-};
-
-module.exports = { logInGet, logInPost, mockLogInSuccess, mockLogInFailure };
+module.exports = { logInGet, logInPost, mockLogInSuccess };

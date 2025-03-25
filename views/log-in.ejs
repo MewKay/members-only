@@ -7,6 +7,12 @@
         <form action="/log-in" method="post">
           <h2>Log in to your account</h2>
 
+          <% if (locals.error) { %>
+           <p class="error-message">
+            <%= error %>
+           </p>
+          <% } %>
+
           <div class="input">
             <label for="username">Username</label>
             <input
