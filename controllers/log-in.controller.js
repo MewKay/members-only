@@ -1,10 +1,15 @@
 const passport = require("passport");
 
 const logInGet = (req, res) => {
-  const { messages } = req.session;
+  const { messages, successRegisterMessage } = req.session;
   const errorMessage = messages?.pop();
+  const successMessage = successRegisterMessage?.pop();
 
-  res.render("log-in", { title: "Log In", error: errorMessage });
+  res.render("log-in", {
+    title: "Log In",
+    error: errorMessage,
+    successMessage: successMessage,
+  });
 };
 
 const logInPost = passport.authenticate("local", {

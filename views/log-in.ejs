@@ -8,9 +8,15 @@
           <h2>Log in to your account</h2>
 
           <% if (locals.error) { %>
-           <p class="error-message">
+           <p class="error message">
             <%= error %>
            </p>
+          <% } %>
+
+          <% if (locals.successMessage) { %>
+            <p class="success message">
+              <%= successMessage %>
+            </p>
           <% } %>
 
           <div class="input">
