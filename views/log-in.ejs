@@ -17,6 +17,14 @@
             <p class="success message">
               <%= successMessage %>
             </p>
+          <% } %> 
+
+          <% if (locals.validationErrorMessages) { %>
+            <ul class="validation-error-mesages">
+              <% for(let field in validationErrorMessages) { %>
+                <li><%= validationErrorMessages[field].msg %></li>
+              <% } %>
+            </ul>
           <% } %>
 
           <div class="input">

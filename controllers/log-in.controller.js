@@ -1,5 +1,6 @@
 const passport = require("passport");
 const logInValidator = require("../middlewares/validators/log-in.validator");
+const logInValidationHandler = require("../middlewares/validators/log-in.handler");
 
 const logInGet = (req, res) => {
   const { messages, successRegisterMessage } = req.session;
@@ -15,6 +16,7 @@ const logInGet = (req, res) => {
 
 const logInPost = [
   logInValidator,
+  logInValidationHandler,
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/log-in",
