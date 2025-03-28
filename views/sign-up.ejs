@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <%- include("partials/head.ejs", { title }) %>
+    <link rel="stylesheet" href="/styles/form.css">
     <link rel="stylesheet" href="/styles/sign-up.css">
   </head>
   <body>
@@ -11,7 +12,7 @@
           <h2>Create your account</h2>
           
           <% if (locals.errors) { %>
-            <ul class="error-messages">
+            <ul class="error message">
               <% errors.forEach((error) => { %>
                 <li><%= error.msg %></li>
               <% }) %>
@@ -100,7 +101,7 @@
   
           <button type="submit">Register</button>
         </form>
-        <div class="log-in-prompt">
+        <div class="prompt">
           <p>Already have an account? 
             <a href="/log-in">
               Log in here.

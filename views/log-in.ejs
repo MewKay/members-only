@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head> </head>
+  <head>
+    <%- include("partials/head.ejs", { title }) %>
+    <link rel="stylesheet" href="/styles/form.css">
+    <link rel="stylesheet" href="/styles/log-in.css" />
+  </head>
   <body>
     <main>
       <div class="content">
@@ -8,7 +12,7 @@
           <h2>Log in to your account</h2>
 
           <% if (locals.error) { %>
-           <p class="error message">
+           <p class="auth error message">
             <%= error %>
            </p>
           <% } %>
@@ -20,7 +24,7 @@
           <% } %> 
 
           <% if (locals.validationErrorMessages) { %>
-            <ul class="validation-error-mesages">
+            <ul class="validation error message">
               <% for(let field in validationErrorMessages) { %>
                 <li><%= validationErrorMessages[field].msg %></li>
               <% } %>
@@ -46,7 +50,7 @@
 
           <button type="submit">Sign in</button>
         </form>
-        <div class="sign-up-prompt">
+        <div class="prompt">
           <p>
             Don't have an account yet?
             <a href="/sign-up"> Sign up here. </a>
