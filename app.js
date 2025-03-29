@@ -12,9 +12,11 @@ app.use(express.static(assetsPath));
 
 const session = require("./config/session");
 const passport = require("passport");
+const globalizeUser = require("./middlewares/globalize-user");
 app.use(session);
 require("./config/passport");
 app.use(passport.session());
+app.use(globalizeUser);
 
 const indexRouter = require("./routes/index.router");
 const signUpRouter = require("./routes/sign-up.router");

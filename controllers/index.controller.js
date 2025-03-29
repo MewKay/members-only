@@ -1,7 +1,5 @@
 const indexGet = (req, res) => {
-  const { user } = req;
-
-  res.render("index", { title: "My Clubhouse", user: user });
+  res.render("index", { title: "My Clubhouse" });
 };
 
 const loggingOut = (req, res, next) => {
