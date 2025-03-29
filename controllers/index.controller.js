@@ -1,13 +1,7 @@
 const indexGet = (req, res) => {
   const { user } = req;
 
-  if (req.isAuthenticated()) {
-    return res.send(
-      `${user.username} is logged in! <a href="/log-out">Log Out</a>`,
-    );
-  }
-
-  res.send("This is index route");
+  res.render("index", { title: "My Clubhouse", user: user });
 };
 
 const loggingOut = (req, res, next) => {
