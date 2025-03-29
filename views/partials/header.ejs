@@ -1,0 +1,32 @@
+<header>
+  <h1 class="brand">
+    My Clubhouse
+  </h1>
+
+  <div class="account-manage">
+    <% if (!locals.user) { %>
+      <div class="links-section">
+        <a href="/log-in">Log In</a>
+        <a href="/sign-up">Sign In</a>
+      </div>
+    <% } else { %>
+      <div class="user-section">
+        <div class="user-info">
+          <p><%= user.first_name %> <%= user.last_name %></p>
+          <p>@<%= user.username %></p>
+        </div>
+        <div class="user-action">
+          <button 
+            class="actions-expands"
+            aria-label="Open user account's actions"     
+          >
+            Open
+          </button>
+          <ul class="select-action">
+            <li><a href="/log-out">Log out</a></li>
+          </ul>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</header>
