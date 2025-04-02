@@ -14,6 +14,7 @@ header h1 {
 
 .user-section {
   display: flex;
+  align-items: center;
 }
 
 .links-section {
@@ -25,4 +26,62 @@ header h1 {
   text-decoration: none;
   font-size: var(--font-size-4);
   color: var(--grey-100);
+}
+
+.user-section {
+  display: flex;
+  gap: var(--spacing-5);
+  align-items: center;
+}
+
+.user-info p:first-of-type {
+  font-size: var(--font-size-4);
+}
+
+.user-info p:last-of-type {
+  color: var(--grey-200);
+}
+
+.user-action {
+  position: relative;
+}
+
+.select-action::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--spacing-2) * -1);
+  right: var(--spacing-4);
+  border-left: var(--spacing-2) solid transparent;
+  border-right: var(--spacing-2) solid transparent;
+  border-bottom: var(--spacing-2) solid var(--grey-100);
+}
+
+.select-action {
+  position: absolute;
+  top: calc(115% + var(--spacing-2));
+  right: 0;
+  z-index: 10;
+  min-width: var(--spacing-9);
+  padding: var(--spacing-2) var(--spacing-4);
+  background-color: var(--grey-100);
+  border-radius: var(--radius-small);
+  box-shadow: var(--shadow-4);
+  text-wrap: nowrap;
+  text-align: right;
+  list-style: none;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0%);
+  transition: all 0.1s ease-in;
+}
+
+.select-action.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-5%);
+}
+
+.select-action a {
+  text-decoration: none;
+  color: var(--grey-800);
 }
