@@ -6,6 +6,11 @@
   </head>
   <body>
     <%- include("partials/header.ejs") %>
+
+    <% if (!locals.user) { %>
+      <%- include("partials/unauth-index.ejs", { messages }) %>
+    <% } %>
+
     <script src="/scripts/header.js"></script>
   </body>
 </html>

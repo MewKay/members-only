@@ -1,0 +1,13 @@
+<main>
+  <div class="post-container">
+    <% messages.forEach((message) => { %>
+      <article class="post">
+        <div class="heading">
+          <h5 class="title"><%= message.title %></h5>
+        </div>
+        <p class="content"><%= message.text %></p>
+        <p class="username">Anonymous</p>
+      </article>
+    <% }) %>
+  </div>
+</main>

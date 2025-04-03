@@ -1,6 +1,12 @@
-const indexGet = (req, res) => {
-  res.render("index", { title: "My Clubhouse" });
-};
+const Message = require("../models/Message.model");
+const asyncHandler = require("express-async-handler");
+
+const indexGet = asyncHandler(async (req, res) => {
+  if (!req.isAuthenticated()) {
+    const messages = await Message.findBy();
+    res.render("index", { title: "My Clubhouse", messages: messages });
+  }
+});
 
 const loggingOut = (req, res, next) => {
   req.logout((error) => {
