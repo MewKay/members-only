@@ -1,0 +1,29 @@
+.post-container {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--spacing-12), 1fr));
+  gap: var(--spacing-5);
+}
+
+.post {
+  padding: var(--spacing-5) var(--spacing-5);
+  background-color: var(--grey-100);
+  box-shadow: var(--shadow-3);
+  border-radius: var(--radius-small);
+}
+
+.post .title {
+  margin-bottom: var(--spacing-2);
+  font-size: var(--font-size-3);
+}
+
+.post .content {
+  font-size: var(--font-size-2);
+}
+
+.post .username {
+  text-align: right;
+  margin-top: var(--spacing-3);
+  font-size: var(--font-size-2);
+  color: var(--grey-600);
+}

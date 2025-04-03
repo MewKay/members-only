@@ -70,7 +70,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: var(--spacing-5) 0;
+  padding: var(--spacing-5) var(--spacing-6);
 }
 
 button:hover {
