@@ -1,0 +1,40 @@
+<main>
+  <div class="create-post-container">
+    <button class="create-post-button">
+      + CREATE A NEW POST
+    </button>
+    <form action="/create-post" method="post" class="hidden">
+      <button type="button" class="cancel" aria-label="Cancel post creation">x</button> 
+      
+      <label for="post-title">Title</label>
+      <input id="post-title" type="text" name="title" maxlength="50" />
+
+      <textarea 
+        id="post-content" 
+        name="text" 
+        maxlength="280" 
+        placeholder="Write your message here..."
+        required
+      ></textarea>
+      
+      <button type="submit">Post</button>
+    </form>
+  </div>
+  <div class="post-container">
+    <% messages.forEach((message) => { %>
+      <div class="grid-cell">
+        <article class="post
+          <% if (message.user_id === user.id) { %>
+            by-user
+          <% } %>
+        ">
+          <div class="heading">
+            <h5 class="title"><%= message.title %></h5>
+          </div>
+          <p class="content"><%= message.text %></p>
+          <p class="username">Anonymous</p>
+        </article>
+      </div>
+    <% }) %>
+  </div>
+</main>

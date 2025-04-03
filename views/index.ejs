@@ -10,6 +10,8 @@
 
     <% if (!locals.user) { %>
       <%- include("partials/unauth-index.ejs", { messages }) %>
+    <% } else { %>
+      <%- include("partials/logged-index.ejs", { messages }) %>
     <% } %>
 
     <script src="/scripts/header.js"></script>
