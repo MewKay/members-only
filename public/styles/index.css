@@ -35,10 +35,6 @@ main {
 
 /* Logged user */
 
-.hidden {
-  display: none;
-}
-
 .create-post-container {
   margin-top: var(--spacing-3);
   margin-bottom: var(--spacing-7);
@@ -58,4 +54,48 @@ main {
 
 .create-post-button:hover {
   background-color: var(--grey-900);
+}
+
+.create-post-container form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: var(--spacing-13);
+  padding: var(--spacing-5) var(--spacing-6);
+  border-radius: var(--radius-small);
+  background-color: var(--grey-800);
+  color: var(--grey-100);
+  box-shadow: var(--shadow-2);
+}
+
+form .close {
+  position: absolute;
+  top: var(--spacing-4);
+  right: var(--spacing-4);
+}
+
+label[for="post-title"] {
+  font-size: var(--font-size-4);
+  margin-bottom: var(--spacing-1);
+}
+
+#post-content,
+#post-title {
+  padding: var(--spacing-2) var(--spacing-3);
+  margin-bottom: var(--spacing-4);
+  border: none;
+  border-radius: var(--radius-small);
+  background-color: var(--grey-100);
+  color: var(--grey-900);
+  resize: none;
+}
+
+.submit-container {
+  display: flex;
+  justify-content: right;
+}
+
+.create-post-button.hidden,
+.create-post-container form.hidden {
+  display: none;
 }
