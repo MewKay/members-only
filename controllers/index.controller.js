@@ -12,6 +12,19 @@ const indexGet = asyncHandler(async (req, res) => {
   }
 });
 
+const indexPost = asyncHandler(async (req, res) => {
+  const user_id = req.user.id;
+  const { title, text } = req.body;
+
+  await Message.create({
+    title,
+    text,
+    user_id,
+  });
+
+  res.redirect("/");
+});
+
 const loggingOut = (req, res, next) => {
   req.logout((error) => {
     if (error) {
@@ -22,4 +35,4 @@ const loggingOut = (req, res, next) => {
   });
 };
 
-module.exports = { indexGet, loggingOut };
+module.exports = { indexGet, indexPost, loggingOut };
