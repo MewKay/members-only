@@ -1,6 +1,6 @@
 <main>
   <div class="create-post-container">
-    <button class="create-post-button hidden">
+    <button class="create-post-button">
       <svg 
         xmlns="http://www.w3.org/2000/svg" 
         viewBox="0 0 24 24" 
@@ -12,7 +12,7 @@
       CREATE A NEW POST
     </button>
 
-    <form action="/create-post" method="post" class="">
+    <form action="/create-post" method="post" class="hidden">
       <button type="button" class="close" aria-label="Cancel post creation">
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
@@ -63,7 +63,11 @@
             <h5 class="title"><%= message.title %></h5>
           </div>
           <p class="content"><%= message.text %></p>
-          <p class="username">Anonymous</p>
+          <p class="username">
+            <% if (message.user_id !== user.id) { %>
+              Anonymous
+            <% } %>
+          </p>
         </article>
       </div>
     <% }) %>

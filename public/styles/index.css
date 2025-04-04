@@ -144,3 +144,12 @@ label[for="post-title"] {
 .create-post-container form.hidden {
   display: none;
 }
+
+.post.by-user {
+  background-color: var(--grey-700);
+}
+
+.post.by-user h5,
+.post.by-user .content {
+  color: var(--grey-100);
+}
