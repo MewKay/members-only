@@ -1,5 +1,10 @@
+main {
+  flex-direction: column;
+}
+
 .post-container {
   flex: 1;
+  align-self: stretch;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(var(--spacing-12), 1fr));
   gap: var(--spacing-5);
@@ -26,4 +31,31 @@
   margin-top: var(--spacing-3);
   font-size: var(--font-size-2);
   color: var(--grey-600);
+}
+
+/* Logged user */
+
+.hidden {
+  display: none;
+}
+
+.create-post-container {
+  margin-top: var(--spacing-3);
+  margin-bottom: var(--spacing-7);
+}
+
+.create-post-button {
+  padding: var(--spacing-3) var(--spacing-6);
+  font-size: var(--font-size-5);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 1px;
+  background-color: var(--grey-800);
+  color: var(--grey-100);
+  box-shadow: var(--shadow-3);
+  border: none;
+  border-radius: var(--radius-medium);
+}
+
+.create-post-button:hover {
+  background-color: var(--grey-900);
 }
