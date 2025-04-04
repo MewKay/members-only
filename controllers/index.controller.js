@@ -1,3 +1,5 @@
+const { matchedData, validationResult } = require("express-validator");
+const postValidator = require("../middlewares/validators/post.validator");
 const Message = require("../models/Message.model");
 const asyncHandler = require("express-async-handler");
 
@@ -12,18 +14,27 @@ const indexGet = asyncHandler(async (req, res) => {
   }
 });
 
-const indexPost = asyncHandler(async (req, res) => {
-  const user_id = req.user.id;
-  const { title, text } = req.body;
+const indexPost = [
+  postValidator,
+  asyncHandler(async (req, res) => {
+    const errors = validationResult(req);
 
-  await Message.create({
-    title,
-    text,
-    user_id,
-  });
+    if (errors.isEmpty()) {
+      return res.send("Fields invalid");
+    }
 
-  res.redirect("/");
-});
+    const user_id = req.user.id;
+    const { title, text } = matchedData(req);
+
+    await Message.create({
+      title,
+      text,
+      user_id,
+    });
+
+    res.redirect("/");
+  }),
+];
 
 const loggingOut = (req, res, next) => {
   req.logout((error) => {

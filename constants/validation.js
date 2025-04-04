@@ -15,6 +15,14 @@ const ranges = {
     min: 4,
     max: 255,
   },
+  title: {
+    min: 0,
+    max: 50,
+  },
+  text: {
+    min: 1,
+    max: 280,
+  },
 };
 
 const locale = "en-US";
