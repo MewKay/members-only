@@ -1,9 +1,14 @@
-const postButton = document.querySelector(".create-post-button");
+const postButtonSelector = ".create-post-button";
+const closeFormSelector = "button.close";
+const postButton = document.querySelector(postButtonSelector);
 const postForm = document.querySelector(".create-post-container form");
-const closeFormButton = document.querySelector("button.close");
 
 window.addEventListener("click", (e) => {
-  if (e.target === postButton || e.target === closeFormButton) {
+  const clickedElement = e.target;
+  const isElementPostButton = clickedElement.closest(postButtonSelector);
+  const isElementCloseFormButton = clickedElement.closest(closeFormSelector);
+
+  if (isElementPostButton || isElementCloseFormButton) {
     postButton.classList.toggle("hidden");
     postForm.classList.toggle("hidden");
   }
