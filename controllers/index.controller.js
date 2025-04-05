@@ -1,7 +1,8 @@
 const { matchedData } = require("express-validator");
-const postValidator = require("../middlewares/validators/post.validator");
 const Message = require("../models/Message.model");
 const asyncHandler = require("express-async-handler");
+const { isAuth } = require("../middlewares/auth");
+const postValidator = require("../middlewares/validators/post.validator");
 const postValidationHandler = require("../middlewares/validators/post.handler");
 
 const indexGet = asyncHandler(async (req, res) => {
@@ -23,6 +24,7 @@ const indexGet = asyncHandler(async (req, res) => {
 });
 
 const indexPost = [
+  isAuth,
   postValidator,
   postValidationHandler,
   asyncHandler(async (req, res) => {
