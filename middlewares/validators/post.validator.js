@@ -6,10 +6,10 @@ const { body } = new ExpressValidator();
 const postValidator = [
   body("title").optional({ values: "falsy" }).trim().isLength(ranges.title)
     .withMessage(`
-      Title is required to be between ${ranges.title.min} and ${ranges.title.max}.  
+      Title can not be more than ${ranges.title.max} characters.  
     `),
   body("text").trim().isLength(ranges.text).withMessage(`
-    Message is required to be between ${ranges.text.min} and ${ranges.text.max}.
+    Message is required to be between ${ranges.text.min} and ${ranges.text.max} characters.
   `),
 ];
 
