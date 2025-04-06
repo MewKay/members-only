@@ -37,13 +37,13 @@ const generateQuery = async () => {
     );
   
     INSERT INTO users 
-      (first_name, last_name, username, password) 
+      (first_name, last_name, username, password, membership_status) 
     VALUES
-      ('Alice', 'Johnson', 'alicej', '${passwords[0]}'),
-      ('Bob', 'Williams', 'bobw', '${passwords[1]}'),
-      ('Charlie', 'Brown', 'charlieb', '${passwords[2]}'),
-      ('Diana', 'Miller', 'dianam', '${passwords[3]}'),
-      ('Eve', 'Davis', 'eved', '${passwords[4]}');
+      ('Alice', 'Johnson', 'alicej', '${passwords[0]}', FALSE),
+      ('Bob', 'Williams', 'bobw', '${passwords[1]}', TRUE),
+      ('Charlie', 'Brown', 'charlieb', '${passwords[2]}', FALSE),
+      ('Diana', 'Miller', 'dianam', '${passwords[3]}', FALSE),
+      ('Eve', 'Davis', 'eved', '${passwords[4]}', TRUE);
   
     INSERT INTO messages
       (title, text, user_id, created_at) 
