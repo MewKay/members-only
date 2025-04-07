@@ -18,9 +18,22 @@ const Message = (function createMessageModel() {
     return rows[0];
   };
 
+  const findAllWithUsers = async () => {
+    const query = `
+      SELECT m.id, title, text, created_at, user_id, username, membership_status
+      FROM messages m
+      INNER JOIN users u 
+        ON m.user_id = u.id;
+    `;
+
+    const { rows } = await db.query(query);
+    return rows;
+  };
+
   return {
     ...entity,
     findMessageUser,
+    findAllWithUsers,
   };
 })();
 

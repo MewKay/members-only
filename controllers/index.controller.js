@@ -15,12 +15,15 @@ const indexGet = asyncHandler(async (req, res) => {
 
   if (!req.isAuthenticated() || !user.membership_status) {
     messages = await Message.findBy();
-    return res.render("index", {
-      title: indexTitle,
-      messages: messages,
-      errors: postValidationErrorMessages,
-    });
+  } else if (user.membership_status) {
+    messages = await Message.findAllWithUsers();
   }
+
+  return res.render("index", {
+    title: indexTitle,
+    messages: messages,
+    errors: postValidationErrorMessages,
+  });
 });
 
 const indexPost = [

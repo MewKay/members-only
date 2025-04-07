@@ -1,0 +1,60 @@
+<div class="create-post-container">
+  <% if (locals.errors) { %>
+    <ul class="error-messages">
+      <% errors.forEach((error) => { %>
+        <li><%= error %></li>          
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <button class="create-post-button">
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      viewBox="0 0 24 24" 
+      class="lucide lucide-plus-icon lucide-plus"
+    >
+      <path d="M5 12h14"/>
+      <path d="M12 5v14"/>
+    </svg> 
+    CREATE A NEW POST
+  </button>
+
+  <form action="/create-post" method="post" class="hidden">
+    <button type="button" class="close" aria-label="Cancel post creation">
+      <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        viewBox="0 0 24 24" 
+        class="lucide lucide-circle-x-icon lucide-circle-x"
+      >
+        <circle cx="12" cy="12" r="10"/>
+        <path d="m15 9-6 6"/>
+        <path d="m9 9 6 6"/>
+      </svg>
+    </button> 
+    
+    <label for="post-title">Title</label>
+    <input id="post-title" type="text" name="title" maxlength="50" />
+
+    <textarea 
+      id="post-content" 
+      name="text" 
+      maxlength="280" 
+      rows="7"
+      placeholder="Write your message here..."
+      required
+    ></textarea>
+    
+    <div class="submit-container">
+      <button type="submit">
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 24 24" 
+          class="lucide lucide-send-horizontal-icon lucide-send-horizontal"
+        >
+          <path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z"/>
+          <path d="M6 12h16"/>
+        </svg>
+      </button>
+    </div>
+  </form>
+</div>

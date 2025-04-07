@@ -8,10 +8,12 @@
   <body>
     <%- include("partials/header.ejs") %>
 
-    <% if (!locals.user) { %>
-      <%- include("partials/unauth-index.ejs", { messages }) %>
-    <% } else { %>
+    <% if (locals.user && !locals.user.membership_status) { %>
       <%- include("partials/logged-index.ejs", { messages }) %>
+    <% } else if (locals.user && locals.user.membership_status) { %>
+      <%- include("partials/member-index.ejs", { messages }) %>
+    <% } else { %>
+      <%- include("partials/unauth-index.ejs", { messages }) %>
     <% } %>
 
     <script src="/scripts/header.js"></script>

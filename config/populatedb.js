@@ -41,7 +41,7 @@ const generateQuery = async () => {
     VALUES
       ('Alice', 'Johnson', 'alicej', '${passwords[0]}', FALSE),
       ('Bob', 'Williams', 'bobw', '${passwords[1]}', TRUE),
-      ('Charlie', 'Brown', 'charlieb', '${passwords[2]}', FALSE),
+      ('Charlie', 'Brown', 'charlieb', '${passwords[2]}', TRUE),
       ('Diana', 'Miller', 'dianam', '${passwords[3]}', FALSE),
       ('Eve', 'Davis', 'eved', '${passwords[4]}', TRUE);
   
@@ -51,9 +51,10 @@ const generateQuery = async () => {
       ('Hello World', 'Just setting up my account!', 1, '2025-03-21 19:15:00+00'),
       ('Lunch Plans?', 'Anyone want to grab lunch later?', 3, '2025-03-22 11:45:00+00'),
       ('Important Update', 'System maintenance scheduled for Friday', 4, '2025-04-01 16:00:00+00'),
-      ('Weekend Plans', 'Hiking trip this Saturday, who''s in?', 5, '2025-04-05 18:20:00+00'),
+      ('Weekend Plans', 'Hiking trip this Saturday, who''s in?', 5, '2025-04-03 18:20:00+00'),
       ('New Project', 'Kickoff meeting moved to Monday', 1, '2025-04-08 10:00:00+00'),
-      ('Book Recommendation', 'Just finished "The Silent Patient" - highly recommend!', 4, '2025-04-08 15:45:00+00');
+      ('Book Recommendation', 'Just finished "The Silent Patient" - highly recommend!', 4, '2025-04-08 15:45:00+00'),
+      ('Lost Pen', 'Anyone found a pen missing its owner ? I can''t go on without it...', 2, '2025-04-09 18:34:00+00');
   `;
 
   return query;
