@@ -27,7 +27,6 @@ main {
 }
 
 .post .username {
-  text-align: right;
   margin-top: var(--spacing-3);
   font-size: var(--font-size-2);
   color: var(--grey-600);
@@ -160,6 +159,25 @@ label[for="post-title"] {
 }
 
 .post.by-user h5,
-.post.by-user .content {
+.post.by-user .content,
+.post.by-user .username {
   color: var(--grey-100);
+}
+
+/* Member user */
+.post .username {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  justify-content: right;
+}
+
+.post .username svg {
+  width: var(--spacing-4);
+  height: var(--spacing-4);
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
 }
