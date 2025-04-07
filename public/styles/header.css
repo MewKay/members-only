@@ -39,7 +39,20 @@ header h1 {
 }
 
 .user-info p:last-of-type {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
   color: var(--grey-200);
+}
+
+.user-info svg {
+  width: var(--spacing-4);
+  height: var(--spacing-4);
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
 }
 
 .user-action {
