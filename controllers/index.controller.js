@@ -4,6 +4,7 @@ const asyncHandler = require("express-async-handler");
 const { isAuth } = require("../middlewares/auth");
 const postValidator = require("../middlewares/validators/post.validator");
 const postValidationHandler = require("../middlewares/validators/post.handler");
+const { formatMessagesDate } = require("../utils/controller.util");
 
 const indexGet = asyncHandler(async (req, res) => {
   const { user } = req;
@@ -13,10 +14,11 @@ const indexGet = asyncHandler(async (req, res) => {
   const { postValidationErrorMessages } = req.session;
   delete req.session.postValidationErrorMessages;
 
-  if (!req.isAuthenticated() || !user.membership_status) {
+  if (req.isAuthenticated() && user.membership_status) {
+    const rawMessages = await Message.findAllWithUsers();
+    messages = formatMessagesDate(rawMessages);
+  } else {
     messages = await Message.findBy();
-  } else if (user.membership_status) {
-    messages = await Message.findAllWithUsers();
   }
 
   return res.render("index", {
