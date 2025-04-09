@@ -181,3 +181,33 @@ label[for="post-title"] {
   stroke-linejoin: round;
   fill: none;
 }
+
+/* Admin user */
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-post-button {
+  padding: var(--spacing-1) var(--spacing-1);
+  background-color: var(--grey-900);
+  color: var(--grey-100);
+  border: none;
+  border-radius: var(--radius-full);
+  visibility: hidden;
+}
+
+.delete-post-button svg {
+  width: var(--spacing-4);
+  height: var(--spacing-4);
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.post:hover .delete-post-button {
+  visibility: visible;
+}
