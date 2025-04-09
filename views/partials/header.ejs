@@ -48,14 +48,14 @@
               <% if (user.membership_status) { %>
                 <form action="/remove-member" method="post">
                   <button 
-                    class="member-toggle" 
+                    class="member-toggle remove" 
                     onclick="confirm('Are you sure you want to revoke your membership ?')"
                   >
                     Remove membership
                   </button>
                 </form>
               <% } else { %>
-                <button class="member-toggle">Become a member</button>
+                <button class="member-toggle add">Become a member</button>
               <% } %>
             </li>
             <li><a href="/log-out">Log out</a></li>
@@ -65,3 +65,4 @@
     <% } %>
   </div>
 </header>
+<%- include("./modal.ejs") %>
