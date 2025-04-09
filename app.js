@@ -21,9 +21,11 @@ app.use(globalizeUser);
 const indexRouter = require("./routes/index.router");
 const signUpRouter = require("./routes/sign-up.router");
 const logInRouter = require("./routes/log-in.router");
+const statusRouter = require("./routes/status.router");
 app.use("/", indexRouter);
 app.use("/sign-up", signUpRouter);
 app.use("/log-in", logInRouter);
+app.use("/", statusRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
