@@ -14,7 +14,9 @@ const indexGet = asyncHandler(async (req, res) => {
   const { postValidationErrorMessages } = req.session;
   delete req.session.postValidationErrorMessages;
 
-  if (req.isAuthenticated() && user.membership_status) {
+  const isPrivilegedUser = user.membership_status || user.is_admin;
+
+  if (req.isAuthenticated() && isPrivilegedUser) {
     const rawMessages = await Message.findAllWithUsers();
     messages = formatMessagesDate(rawMessages);
   } else {

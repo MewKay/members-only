@@ -20,7 +20,7 @@ const Message = (function createMessageModel() {
 
   const findAllWithUsers = async () => {
     const query = `
-      SELECT m.id, title, text, created_at, user_id, username, membership_status
+      SELECT m.id, title, text, created_at, user_id, username, membership_status, is_admin
       FROM messages m
       INNER JOIN users u 
         ON m.user_id = u.id;
