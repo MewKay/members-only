@@ -15,4 +15,11 @@ const membershipAdd = async (req, res) => {
   res.redirect("/");
 };
 
-module.exports = { membershipAdd };
+const membershipRemove = async (req, res) => {
+  const { user } = req;
+  await User.update(user.id, { membership_status: false });
+
+  res.redirect("/");
+};
+
+module.exports = { membershipAdd, membershipRemove };

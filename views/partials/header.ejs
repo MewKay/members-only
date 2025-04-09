@@ -17,7 +17,8 @@
           </p>
           <p>
             @<%= user.username %>
-            <% if (locals.user.membership_status) { %>
+            <% if (
+              user.membership_status) { %>
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
                 viewBox="0 0 24 24" 
@@ -49,7 +50,7 @@
                 <form action="/remove-member" method="post">
                   <button 
                     class="member-toggle remove" 
-                    onclick="confirm('Are you sure you want to revoke your membership ?')"
+                    onclick="return confirm('Are you sure you want to revoke your membership ?')"
                   >
                     Remove membership
                   </button>
