@@ -25,7 +25,8 @@ const generateQuery = async () => {
       last_name VARCHAR(30) NOT NULL,
       username VARCHAR(15) UNIQUE NOT NULL,
       password VARCHAR(255) NOT NULL,
-      membership_status BOOLEAN NOT NULL DEFAULT FALSE 
+      membership_status BOOLEAN NOT NULL DEFAULT FALSE,
+      is_admin BOOLEAN NOT NULL DEFAULT FALSE
     );
   
     CREATE TABLE IF NOT EXISTS messages (
