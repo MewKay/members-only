@@ -1,0 +1,58 @@
+dialog {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: var(--spacing-6) var(--spacing-7);
+  border: none;
+  border-radius: var(--radius-medium);
+  background-color: var(--grey-200);
+  box-shadow: var(--shadow-5);
+  text-align: center;
+}
+
+dialog::backdrop {
+  background-color: hsl(from var(--grey-100) h s l / 0.5);
+}
+
+dialog h3 {
+  font-size: var(--font-size-4);
+  margin-bottom: var(--spacing-2);
+}
+
+dialog p {
+  font-size: var(--font-size-3);
+  margin-bottom: var(--spacing-5);
+}
+
+dialog input {
+  border: none;
+  padding: var(--spacing-2) var(--spacing-3);
+  background-color: var(--grey-400);
+  border-radius: var(--radius-small);
+  font-size: var(--font-size-3);
+  margin-bottom: var(--spacing-5);
+}
+
+dialog .button-container {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-5);
+}
+
+dialog .button-container button {
+  padding: var(--spacing-1) var(--spacing-3);
+  border: none;
+  border-radius: var(--radius-small);
+  box-shadow: var(--shadow-1);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-3);
+}
+
+dialog button[type="reset"] {
+  background-color: var(--grey-100);
+}
+
+dialog button[type="submit"] {
+  background-color: var(--grey-900);
+  color: var(--grey-100);
+}
