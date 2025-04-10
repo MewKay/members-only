@@ -1,5 +1,7 @@
 const ValidationError = require("../errors/ValidationError");
+const { isAuth } = require("../middlewares/auth");
 const User = require("../models/User.model");
+const asyncHandler = require("express-async-handler");
 require("dotenv").config();
 
 const membershipAdd = async (req, res) => {
@@ -22,4 +24,20 @@ const membershipRemove = async (req, res) => {
   res.redirect("/");
 };
 
-module.exports = { membershipAdd, membershipRemove };
+const adminAdd = [
+  isAuth,
+  asyncHandler(async (req, res) => {
+    const { admin_password } = req.body;
+    const { user } = req;
+
+    if (!admin_password || admin_password !== process.env.ADMIN_PASSWORD) {
+      throw new ValidationError("The password provided is invalid");
+    }
+
+    await User.update(user.id, { is_admin: true });
+
+    res.redirect("/");
+  }),
+];
+
+module.exports = { membershipAdd, membershipRemove, adminAdd };
