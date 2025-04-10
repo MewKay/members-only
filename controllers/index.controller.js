@@ -1,4 +1,4 @@
-const { matchedData, validationResult } = require("express-validator");
+const { matchedData } = require("express-validator");
 const Message = require("../models/Message.model");
 const asyncHandler = require("express-async-handler");
 const { isAuth, isAdmin } = require("../middlewares/auth");
@@ -53,14 +53,9 @@ const postDelete = [
   isAuth,
   isAdmin,
   postParamValidator,
+  postValidationHandler,
   asyncHandler(async (req, res) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.send(errors.array()[0].msg);
-    }
-
-    const messageId = Number(req.params.messageId);
+    const { messageId } = matchedData(req);
 
     await Message.remove(messageId);
 
