@@ -4,25 +4,31 @@ const User = require("../models/User.model");
 const asyncHandler = require("express-async-handler");
 require("dotenv").config();
 
-const membershipAdd = async (req, res) => {
-  const { member_password } = req.body;
-  const { user } = req;
+const membershipAdd = [
+  isAuth,
+  asyncHandler(async (req, res) => {
+    const { member_password } = req.body;
+    const { user } = req;
 
-  if (!member_password || member_password !== process.env.MEMBERS_PASSWORD) {
-    throw new ValidationError("The password provided is invalid");
-  }
+    if (!member_password || member_password !== process.env.MEMBERS_PASSWORD) {
+      throw new ValidationError("The password provided is invalid");
+    }
 
-  await User.update(user.id, { membership_status: true });
+    await User.update(user.id, { membership_status: true });
 
-  res.redirect("/");
-};
+    res.redirect("/");
+  }),
+];
 
-const membershipRemove = async (req, res) => {
-  const { user } = req;
-  await User.update(user.id, { membership_status: false });
+const membershipRemove = [
+  isAuth,
+  asyncHandler(async (req, res) => {
+    const { user } = req;
+    await User.update(user.id, { membership_status: false });
 
-  res.redirect("/");
-};
+    res.redirect("/");
+  }),
+];
 
 const adminAdd = [
   isAuth,
