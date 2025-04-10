@@ -10,7 +10,7 @@
         ">
           <div class="heading">
             <h5 class="title"><%= message.title %></h5>
-            <form action="/delete-post" method="post">
+            <form action="/delete-post/<%= message.id %>" method="post">
               <button 
                 class="delete-post-button"
                 onclick="return confirm('Are you sure you want to delete this message ?')"  

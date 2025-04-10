@@ -1,7 +1,7 @@
 const { matchedData } = require("express-validator");
 const Message = require("../models/Message.model");
 const asyncHandler = require("express-async-handler");
-const { isAuth } = require("../middlewares/auth");
+const { isAuth, isAdmin } = require("../middlewares/auth");
 const postValidator = require("../middlewares/validators/post.validator");
 const postValidationHandler = require("../middlewares/validators/post.handler");
 const { formatMessagesDate } = require("../utils/controller.util");
@@ -48,6 +48,18 @@ const indexPost = [
   }),
 ];
 
+const postDelete = [
+  isAuth,
+  isAdmin,
+  asyncHandler(async (req, res) => {
+    const messageId = Number(req.params.messageId);
+
+    await Message.remove(messageId);
+
+    res.redirect("/");
+  }),
+];
+
 const loggingOut = (req, res, next) => {
   req.logout((error) => {
     if (error) {
@@ -58,4 +70,4 @@ const loggingOut = (req, res, next) => {
   });
 };
 
-module.exports = { indexGet, indexPost, loggingOut };
+module.exports = { indexGet, indexPost, postDelete, loggingOut };

@@ -9,11 +9,11 @@ const isAuth = (req, res, next) => {
 const isAdmin = (req, res, next) => {
   const { user } = req;
 
-  if (user.isAdmin) {
+  if (user.is_admin) {
     return next();
   }
 
-  res.status(401).send("Unauthorized action");
+  res.status(401).send("Unauthorized action (not admin)");
 };
 
 module.exports = { isAuth, isAdmin };
