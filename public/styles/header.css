@@ -118,10 +118,13 @@ header h1 {
   color: var(--grey-800);
 }
 
-.select-action .member-toggle {
+.select-action button {
   background-color: transparent;
   border: none;
   color: var(--grey-800);
-  border-bottom: solid 1px var(--grey-300);
   padding-bottom: var(--spacing-1);
+}
+
+.select-action li:nth-last-child(2) {
+  border-bottom: solid 1px var(--grey-300);
 }
