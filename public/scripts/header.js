@@ -1,5 +1,6 @@
 const dropdown = document.querySelector(".select-action");
 const memberModal = document.querySelector(".member-dialog");
+const adminModal = document.querySelector(".admin-dialog");
 
 const handleDropdownClick = (e) => {
   const clickedElement = e.target;
@@ -32,5 +33,22 @@ const handleMemberModalToggle = (e) => {
   }
 };
 
+const handleAdminModalToggle = (e) => {
+  const clickedElement = e.target;
+  const isElementModalOpen = clickedElement.closest(".admin-toggle");
+  const isElementModalClose = clickedElement.closest(
+    'dialog button[type="reset"]',
+  );
+
+  if (isElementModalOpen) {
+    adminModal.showModal();
+  }
+
+  if (isElementModalClose) {
+    adminModal.close();
+  }
+};
+
 window.addEventListener("click", handleDropdownClick);
 window.addEventListener("click", handleMemberModalToggle);
+window.addEventListener("click", handleAdminModalToggle);
