@@ -1,5 +1,5 @@
 const dropdown = document.querySelector(".select-action");
-const modal = document.querySelector("dialog");
+const memberModal = document.querySelector(".member-dialog");
 
 const handleDropdownClick = (e) => {
   const clickedElement = e.target;
@@ -16,7 +16,7 @@ const handleDropdownClick = (e) => {
   }
 };
 
-const handleModalToggle = (e) => {
+const handleMemberModalToggle = (e) => {
   const clickedElement = e.target;
   const isElementModalOpen = clickedElement.closest(".member-toggle.add");
   const isElementModalClose = clickedElement.closest(
@@ -24,13 +24,13 @@ const handleModalToggle = (e) => {
   );
 
   if (isElementModalOpen) {
-    modal.showModal();
+    memberModal.showModal();
   }
 
   if (isElementModalClose) {
-    modal.close();
+    memberModal.close();
   }
 };
 
 window.addEventListener("click", handleDropdownClick);
-window.addEventListener("click", handleModalToggle);
+window.addEventListener("click", handleMemberModalToggle);
