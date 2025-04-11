@@ -16,7 +16,7 @@ const postValidationHandler = (req, res, next) => {
       return next(error);
     }
 
-    res.redirect("/");
+    res.status(400).redirect("/");
   });
 };
 

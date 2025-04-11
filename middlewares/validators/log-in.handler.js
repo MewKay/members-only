@@ -8,7 +8,7 @@ const logInValidationHandler = (req, res, next) => {
   }
 
   const validationErrorMessages = errors.mapped();
-  return res.render("log-in", {
+  return res.status(400).render("log-in", {
     title: "Log In",
     validationErrorMessages: validationErrorMessages,
   });
