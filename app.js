@@ -22,10 +22,13 @@ const indexRouter = require("./routes/index.router");
 const signUpRouter = require("./routes/sign-up.router");
 const logInRouter = require("./routes/log-in.router");
 const statusRouter = require("./routes/status.router");
+const errorHandler = require("./middlewares/errorHandler");
 app.use("/", indexRouter);
 app.use("/sign-up", signUpRouter);
 app.use("/log-in", logInRouter);
 app.use("/", statusRouter);
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
