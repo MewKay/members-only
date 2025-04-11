@@ -23,11 +23,13 @@ const signUpRouter = require("./routes/sign-up.router");
 const logInRouter = require("./routes/log-in.router");
 const statusRouter = require("./routes/status.router");
 const errorHandler = require("./middlewares/error-handler");
+const notFoundRoute = require("./middlewares/not-found-route");
 app.use("/", indexRouter);
 app.use("/sign-up", signUpRouter);
 app.use("/log-in", logInRouter);
 app.use("/", statusRouter);
 
+app.use(notFoundRoute);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
