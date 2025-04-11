@@ -1,4 +1,5 @@
 const UnauthorizedError = require("../errors/UnauthorizedError");
+const ForbiddenError = require("../errors/ForbiddenError");
 
 const isAuth = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -15,7 +16,7 @@ const isAdmin = (req, res, next) => {
     return next();
   }
 
-  res.status(401).send("Unauthorized action (not admin)");
+  throw new ForbiddenError("Permissions insufficient");
 };
 
 module.exports = { isAuth, isAdmin };
