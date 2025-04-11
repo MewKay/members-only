@@ -1,5 +1,5 @@
-const UnauthorizedError = require("../errors/UnauthorizedError");
-const ForbiddenError = require("../errors/ForbiddenError");
+const UnauthorizedError = require("../errors/Unauthorized.error");
+const ForbiddenError = require("../errors/Forbidden.error");
 
 const isAuth = (req, res, next) => {
   if (req.isAuthenticated()) {

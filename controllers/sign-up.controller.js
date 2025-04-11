@@ -14,12 +14,16 @@ const signUpPost = [
   signUpValidationHandler,
   asyncHandler(async (req, res) => {
     const { first_name = "", last_name, username, password } = matchedData(req);
-    await User.create({
+    const result = await User.create({
       first_name,
       last_name,
       username,
       password: await bcrypt.hash(password, 10),
     });
+
+    if (result.rowCount <= 0) {
+      throw new Error("An error occured when creating the user account.");
+    }
 
     req.session.successRegisterMessage = [
       "Account created successfully! You can now log in.",

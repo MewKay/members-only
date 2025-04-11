@@ -22,7 +22,7 @@ const indexRouter = require("./routes/index.router");
 const signUpRouter = require("./routes/sign-up.router");
 const logInRouter = require("./routes/log-in.router");
 const statusRouter = require("./routes/status.router");
-const errorHandler = require("./middlewares/errorHandler");
+const errorHandler = require("./middlewares/error-handler");
 app.use("/", indexRouter);
 app.use("/sign-up", signUpRouter);
 app.use("/log-in", logInRouter);

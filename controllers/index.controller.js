@@ -6,6 +6,7 @@ const postValidator = require("../middlewares/validators/post.validator");
 const postValidationHandler = require("../middlewares/validators/post.handler");
 const { formatMessagesDate } = require("../utils/controller.util");
 const postParamValidator = require("../middlewares/validators/post-param.validator");
+const NotFoundError = require("../errors/NotFound.error");
 
 const indexGet = asyncHandler(async (req, res) => {
   const { user } = req;
@@ -19,9 +20,18 @@ const indexGet = asyncHandler(async (req, res) => {
 
   if (req.isAuthenticated() && isPrivilegedUser) {
     const rawMessages = await Message.findAllWithUsers();
+
+    if (!rawMessages) {
+      throw new NotFoundError("An error occured when querying messages");
+    }
+
     messages = formatMessagesDate(rawMessages);
   } else {
     messages = await Message.findBy();
+
+    if (!messages) {
+      throw new NotFoundError("An error occured when querying messages");
+    }
   }
 
   return res.render("index", {
@@ -38,12 +48,15 @@ const indexPost = [
   asyncHandler(async (req, res) => {
     const user_id = req.user.id;
     const { title, text } = matchedData(req);
-
-    await Message.create({
+    const result = await Message.create({
       title,
       text,
       user_id,
     });
+
+    if (result.rowCount <= 0) {
+      throw new Error("An error occured when creating the message.");
+    }
 
     res.redirect("/");
   }),
@@ -56,8 +69,11 @@ const postDelete = [
   postValidationHandler,
   asyncHandler(async (req, res) => {
     const { messageId } = matchedData(req);
+    const result = await Message.remove(messageId);
 
-    await Message.remove(messageId);
+    if (result.rowCount <= 0) {
+      throw new Error("An error occured when creating the message.");
+    }
 
     res.redirect("/");
   }),

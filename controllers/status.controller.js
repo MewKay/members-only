@@ -1,4 +1,4 @@
-const ValidationError = require("../errors/ValidationError");
+const ValidationError = require("../errors/Validation.error");
 const { isAuth } = require("../middlewares/auth");
 const User = require("../models/User.model");
 const asyncHandler = require("express-async-handler");

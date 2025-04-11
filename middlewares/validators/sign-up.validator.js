@@ -1,7 +1,7 @@
 const { ExpressValidator } = require("express-validator");
 const User = require("../../models/User.model");
 const { ranges, locale } = require("../../constants/validation");
-const ValidationError = require("../../errors/ValidationError");
+const ValidationError = require("../../errors/Validation.error");
 
 const { body } = new ExpressValidator({
   isUsernameTaken: async (value) => {
